@@ -2,26 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --text: #191a1a;
+    --background: #eef0f2;
+    --primary: #323f4e;
+    --secondary: #88a3c3;
+    --accent: #4371a3;
+  }
+  .dark {
+    --text: #e5e6e6;
+    --background: #0d0f11;
+    --primary: #b1becd;
+    --secondary: #3c5677;
+    --accent: #5c8bbc;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  h1 {
+    @apply text-3xl  font-bold md:text-4xl lg:text-6xl md:leading-relaxed;
+  }
+
+  h2 {
+    @apply text-2xl  font-semibold md:text-3xl lg:text-4xl;
+  }
+
+  h3 {
+    @apply text-xl  font-semibold md:text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-lg  font-semibold md:text-xl;
+  }
+
+  .narrow-container {
+    @apply w-full max-w-[90%] mx-auto lg:max-w-[50rem];
+  }
+
+  .big-container {
+    @apply w-full max-w-[90%] mx-auto lg:max-w-[70rem];
+  }
+
+  p {
+    @apply leading-relaxed text-base md:leading-relaxed lg:text-lg lg:leading-loose;
+  }
+}
+
+section {
+  padding: 3rem 0;
+}
+
+img {
+  width: auto;
+  height: auto;
+}
+
+blockquote::before {
+  content: open-quote;
+}
+
+blockquote::after {
+  content: close-quote;
+}
+
+a[data-tool-tip] {
+  position: relative;
+}
+
+a[data-tool-tip]::after {
+  content: attr(data-tool-tip);
+  display: block;
+  position: absolute;
+  background-color: var(--primary);
+  padding: 1em 3em;
+  color: var(--background);
+  border-radius: 5px;
+  font-size: 0.6em;
+  white-space: nowrap;
+  bottom: 100%;
+  left: 0;
+  transform: scale(0);
+  transition: transform ease-in 120ms;
+}
+
+a[data-tool-tip]:hover::after {
+  transform: scale(1);
+}
+
+.heading::after {
+  content: '';
+  height: 1px;
+  width: 100%;
+  margin-block: auto;
+  margin-top: 0.3em;
+  margin-bottom: 0.8em;
+  display: block;
+  background-color: var(--text);
+}
+
+.border-class {
+  border: 2px solid red;
+}
+
+.parent-container {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
 }
